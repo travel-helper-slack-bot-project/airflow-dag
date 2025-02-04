@@ -174,5 +174,5 @@ with DAG(
 ) as dag:
 
     city_info = et()
-    load(city_info, 'yeojun', 'get_city_info')
+    load(city_info, 'raw_data', 'get_city_info')
     

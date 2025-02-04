@@ -1,9 +1,14 @@
 from airflow import DAG
 from airflow.models import Variable
 from airflow.providers.snowflake.hooks.snowflake import SnowflakeHook
+from airflow.operators.python import PythonOperator
 from airflow.decorators import task
 
 from datetime import datetime, timedelta
+from plugins.s3_to_snowflake import * 
+from plugins.parquet_to_s3 import * 
+
+import pandas as pd
 
 import requests
 import logging
@@ -19,7 +24,7 @@ def get_snowflake_connection():
 @task
 def get_lat_lon():
     cur = get_snowflake_connection()
-    select_sql = "SELECT row_num, lat, lon FROM yeojun.get_city_info;"
+    select_sql = "SELECT row_num, lat, lon FROM raw_data.get_city_info;"
 
     try: 
         cur.execute(select_sql)
@@ -30,7 +35,8 @@ def get_lat_lon():
     except Exception as e:
         logging.error(f"Error fetching data from Snowflake: {e}")
         raise
-
+    finally:
+        cur.close()
 
 
 @task
@@ -49,7 +55,7 @@ def et(lat_lon_list):
     api_key = Variable.get("open_weather_api_key")
 
     # https://openweathermap.org/forecast5
-    cities_info = []
+    city_info = []
     for row_num, lat, lon in lat_lon_list:
         url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}"
 
@@ -61,10 +67,6 @@ def et(lat_lon_list):
             if "city" not in data:
                 raise ValueError(f"Invalid API response for lat: {lat}, lon: {lon}")
 
-            city_info = []
-            name = data['city']['name']
-            country = data['city']['country']
-
             for d in data.get("list", []):  # list 키가 없을 수도 있으므로 안전하게 가져옴
                 temperature = d['main'].get('temp', 'NULL')  # 기본값 설정
                 weather_condition = d['weather'][0].get('main', 'Unknown')
@@ -72,12 +74,15 @@ def et(lat_lon_list):
                 precipitation = d.get('pop', 0)  # 기본값 0
                 timestamp = d.get('dt_txt', 'Unknown')
 
-                city_info.append(
-                    f"({row_num},'{name}', '{country}', {temperature}, '{weather_condition}', "
-                    f"{cloudiness}, {precipitation}, '{timestamp}')"
-                )
+                city_info.append({
+                    "row_num":row_num,
+                    "temp": temperature,
+                    "weather": weather_condition,
+                    "clouds": cloudiness,
+                    "pop": precipitation,
+                    "datetime": timestamp
+                })
 
-            cities_info.append(city_info)
 
             # API Rate Limit을 고려한 딜레이 추가 (1초 대기)
             time.sleep(1)
@@ -88,63 +93,38 @@ def et(lat_lon_list):
         except KeyError as e:
             logging.error(f"Missing expected key in API response: {e}")
             raise
-
-    return cities_info
-
-
+    
+    df = pd.DataFrame(city_info)
+    return df
 
 @task
-def load(schema, table, cities_info):
-    cur = get_snowflake_connection()
-    delete_sql = f"DELETE FROM {schema}.{table};"
-    create_sql = f"""
-    CREATE TABLE IF NOT EXISTS {schema}.{table} (
-        row_num INT,
-        city VARCHAR,
-        country VARCHAR,
-        temp DOUBLE,
-        weather VARCHAR,
-        clouds NUMBER,
-        pop DOUBLE,
-        datetime TIMESTAMP
-    );
-    """
-    logging.info(create_sql)
+def parquet_to_s3(topic, s3_conn_id, replace, df):
+    upload_parquet_to_s3(topic, s3_conn_id, replace, df)
 
-    try:
-        cur.execute(create_sql)
-        cur.execute(delete_sql)
-        cur.execute("Commit;")
-    except Exception as e:
-        cur.execute("Rollback;")
-        raise
+@task
+def s3_to_snowflake(topic,schema, table):
+    load_s3_to_snowflake(topic, schema, table)
 
-    # 데이터가 너무 많으면 Batch Insert 처리
-    batch_size = 100
-    try:
-        for city in cities_info:
-            for i in range(0, len(city), batch_size):
-                batch = city[i:i + batch_size]
-                insert_sql = f"""INSERT INTO {schema}.{table} VALUES """ + ",".join(batch)
-                cur.execute(insert_sql)
-        cur.execute("Commit;")
-    except Exception as e:
-        cur.execute("Rollback;")
-        raise
 
 with DAG(
-    dag_id = 'get_city_weather',
+    dag_id = 'get_weather_information',
     start_date = datetime(2025,1,1), # 날짜가 미래인 경우 실행이 안됨
     schedule = '30 0 * * *',  # 적당히 조절
     max_active_runs = 1,
     catchup = False,
+    tags=['API'],
     default_args = {
         'retries': 1,
         'retry_delay': timedelta(minutes=3),
     }
 ) as dag:
+    
+    topic = "weather"
+    table = "slackbot_"+ topic +"_info"
+    schema = "raw_data"
 
     lat_lon_list = get_lat_lon()
-    cities_info = et(lat_lon_list)
-    load("yeojun", "city_weather", cities_info)
+    city_df = et(lat_lon_list)
+    parquet_to_s3(topic, "aws_conn_id", True, city_df) >>  s3_to_snowflake(topic, schema, table)
+    
 

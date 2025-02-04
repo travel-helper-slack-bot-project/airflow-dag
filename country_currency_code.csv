@@ -1,0 +1,154 @@
+ISO3166,Country_ENG,ISO4217,Country_KOR
+AF,Afghanistan,AFN,아프가니스탄
+AL,Albania,ALL,알바니아
+DZ,Algeria,DZD,알제리
+AD,Andorra,EUR,안도라
+AO,Angola,AOA,앙골라
+AG,Antigua and Barbuda,XCD,앤티가 바부다
+AR,Argentina,ARS,아르헨티나
+AM,Armenia,AMD,아르메니아
+AU,Australia,AUD,오스트레일리아
+AT,Austria,EUR,오스트리아
+AZ,Azerbaijan,AZN,아제르바이잔
+BS,Bahamas,BSD,바하마
+BH,Bahrain,BHD,바레인
+BD,Bangladesh,BDT,방글라데시
+BB,Barbados,BBD,바베이도스
+BY,Belarus,BYN,벨라루스
+BE,Belgium,EUR,벨기에
+BZ,Belize,BZD,벨리즈
+BJ,Benin,XOF,베냉
+BT,Bhutan,BTN,부탄
+BO,Bolivia,BOB,볼리비아
+BA,Bosnia and Herzegovina,BAM,보스니아 헤르체고비나
+BW,Botswana,BWP,보츠와나
+BR,Brazil,BRL,브라질
+BN,Brunei,BND,브루나이
+BG,Bulgaria,BGN,불가리아
+BF,Burkina Faso,XOF,부르키나파소
+BI,Burundi,BIF,부룬디
+CV,Cabo Verde,CVE,카보베르데
+KH,Cambodia,KHR,캄보디아
+CM,Cameroon,XAF,카메룬
+CA,Canada,CAD,캐나다
+CF,Central African Republic,XAF,중앙아프리카공화국
+TD,Chad,XAF,차드
+CL,Chile,CLP,칠레
+CN,China,CNY,중국
+CO,Colombia,COP,콜롬비아
+KM,Comoros,KMF,코모로
+CG,Congo (Congo-Brazzaville),XAF,콩고 공화국
+CD,Congo (Congo-Kinshasa),CDF,콩고 민주 공화국
+CR,Costa Rica,CRC,코스타리카
+HR,Croatia,HRK,크로아티아
+CU,Cuba,CUP,쿠바
+CY,Cyprus,EUR,키프로스
+CZ,Czech Republic,CZK,체코
+DK,Denmark,DKK,덴마크
+DJ,Djibouti,DJF,지부티
+DM,Dominica,XCD,도미니카
+DO,Dominican Republic,DOP,도미니카 공화국
+EC,Ecuador,USD,에콰도르
+EG,Egypt,EGP,이집트
+SV,El Salvador,USD,엘살바도르
+GQ,Equatorial Guinea,XAF,적도 기니
+ER,Eritrea,ERN,에리트레아
+EE,Estonia,EUR,에스토니아
+SZ,Eswatini (Swaziland),SZL,에스와티니(스와질랜드)
+ET,Ethiopia,ETB,에티오피아
+FJ,Fiji,FJD,피지
+FI,Finland,EUR,핀란드
+FR,France,EUR,프랑스
+GA,Gabon,XAF,가봉
+GM,Gambia,GMD,감비아
+GE,Georgia,GEL,조지아
+DE,Germany,EUR,독일
+GH,Ghana,GHS,가나
+GR,Greece,EUR,그리스
+GD,Grenada,XCD,그레나다
+GT,Guatemala,GTQ,과테말라
+GN,Guinea,GNF,기니
+GW,Guinea-Bissau,XOF,기니비사우
+GY,Guyana,GYD,가이아나
+HT,Haiti,HTG,아이티
+HN,Honduras,HNL,온두라스
+HU,Hungary,HUF,헝가리
+IS,Iceland,ISK,아이슬란드
+IN,India,INR,인도
+ID,Indonesia,IDR,인도네시아
+IR,Iran,IRR,이란
+IQ,Iraq,IQD,이라크
+IE,Ireland,EUR,아일랜드
+IL,Israel,ILS,이스라엘
+IT,Italy,EUR,이탈리아
+JM,Jamaica,JMD,자메이카
+JP,Japan,JPY,일본
+JO,Jordan,JOD,요르단
+KZ,Kazakhstan,KZT,카자흐스탄
+KE,Kenya,KES,케냐
+KI,Kiribati,AUD,키리바시
+KP,"Korea, North",KPW,북한
+KR,"Korea, South",KRW,대한민국
+KW,Kuwait,KWD,쿠웨이트
+KG,Kyrgyzstan,KGS,키르기스스탄
+LA,Laos,LAK,라오스
+LV,Latvia,EUR,라트비아
+LB,Lebanon,LBP,레바논
+LS,Lesotho,LSL,레소토
+LR,Liberia,LRD,라이베리아
+LY,Libya,LYD,리비아
+LI,Liechtenstein,CHF,리히텐슈타인
+LT,Lithuania,EUR,리투아니아
+LU,Luxembourg,EUR,룩셈부르크
+MG,Madagascar,MGA,마다가스카르
+MW,Malawi,MWK,말라위
+MY,Malaysia,MYR,말레이시아
+MV,Maldives,MVR,몰디브
+ML,Mali,XOF,말리
+MT,Malta,EUR,몰타
+MX,Mexico,MXN,멕시코
+MD,Moldova,MDL,몰도바
+MC,Monaco,EUR,모나코
+MN,Mongolia,MNT,몽골
+ME,Montenegro,EUR,몬테네그로
+MA,Morocco,MAD,모로코
+MZ,Mozambique,MZN,모잠비크
+MM,Myanmar,MMK,미얀마
+NA,Namibia,NAD,나미비아
+NP,Nepal,NPR,네팔
+NL,Netherlands,EUR,네덜란드
+NZ,New Zealand,NZD,뉴질랜드
+NI,Nicaragua,NIO,니카라과
+NE,Niger,XOF,니제르
+NG,Nigeria,NGN,나이지리아
+MK,North Macedonia,MKD,북마케도니아
+NO,Norway,NOK,노르웨이
+OM,Oman,OMR,오만
+PK,Pakistan,PKR,파키스탄
+PS,Palestine,ILS,팔레스타인
+PA,Panama,PAB,파나마
+PG,Papua New Guinea,PGK,파푸아뉴기니
+PY,Paraguay,PYG,파라과이
+PE,Peru,PEN,페루
+PH,Philippines,PHP,필리핀
+PL,Poland,PLN,폴란드
+PT,Portugal,EUR,포르투갈
+QA,Qatar,QAR,카타르
+RO,Romania,RON,루마니아
+RU,Russia,RUB,러시아
+RW,Rwanda,RWF,르완다
+SA,Saudi Arabia,SAR,사우디아라비아
+RS,Serbia,RSD,세르비아
+SG,Singapore,SGD,싱가포르
+ZA,South Africa,ZAR,남아프리카공화국
+ES,Spain,EUR,스페인
+SE,Sweden,SEK,스웨덴
+CH,Switzerland,CHF,스위스
+TH,Thailand,THB,태국
+TR,Turkey,TRY,터키
+UA,Ukraine,UAH,우크라이나
+AE,United Arab Emirates,AED,아랍에미리트
+GB,United Kingdom,GBP,영국
+US,United States,USD,미국
+VN,Vietnam,VND,베트남
+ZW,Zimbabwe,ZWL,짐바브웨
