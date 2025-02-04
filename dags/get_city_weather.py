@@ -146,5 +146,5 @@ with DAG(
 
     lat_lon_list = get_lat_lon()
     cities_info = et(lat_lon_list)
-    load("jaiwoo", "city_weather", cities_info)
+    load('yeojun', "city_weather", cities_info)
 
