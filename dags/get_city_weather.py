@@ -19,13 +19,13 @@ def get_snowflake_connection():
 @task
 def get_lat_lon():
     cur = get_snowflake_connection()
-    select_sql = "SELECT row_num, lat, lon FROM yeojun.get_city_info;"
+    select_sql = "SELECT row_num, lat, lon FROM jaiwoo.get_city_info;"
 
     try: 
         cur.execute(select_sql)
         result = cur.fetchall()
         if not result:
-            raise ValueError("No city data found in 'yeojun.get_city_info' table.")
+            raise ValueError("No city data found in 'jaiwoo.get_city_info' table.")
         return result
     except Exception as e:
         logging.error(f"Error fetching data from Snowflake: {e}")
@@ -146,5 +146,5 @@ with DAG(
 
     lat_lon_list = get_lat_lon()
     cities_info = et(lat_lon_list)
-    load("yeojun", "city_weather", cities_info)
+    load("jaiwoo", "city_weather", cities_info)
 
