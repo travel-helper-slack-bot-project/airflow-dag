@@ -45,7 +45,7 @@ with DAG(
     start_date = datetime(2025, 1, 27),
     catchup=False,
     tags=['API'],
-    schedule_interval='0 12 * * *'
+    schedule_interval='0 3 * * *'
 ) as dag:
     
     topic ="currency"

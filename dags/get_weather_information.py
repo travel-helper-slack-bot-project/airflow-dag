@@ -109,7 +109,7 @@ def s3_to_snowflake(topic,schema, table):
 with DAG(
     dag_id = 'get_weather_information',
     start_date = datetime(2025,1,1), # 날짜가 미래인 경우 실행이 안됨
-    schedule = '30 0 * * *',  # 적당히 조절
+    schedule = '30 15 * * *',  # 적당히 조절
     max_active_runs = 1,
     catchup = False,
     tags=['API'],

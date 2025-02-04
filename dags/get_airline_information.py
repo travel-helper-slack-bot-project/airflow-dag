@@ -27,7 +27,7 @@ with DAG(
     start_date=datetime(2025, 1, 25),
     catchup= False, 
     tags = ['API'],
-    schedule= '0 10 */3 * *'  
+    schedule= '0 15 */3 * *'  
 ) as dag:
 
     topic = "airline"
