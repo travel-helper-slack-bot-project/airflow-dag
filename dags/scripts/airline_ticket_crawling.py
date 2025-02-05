@@ -58,7 +58,7 @@ def naver_airline_ticke_info_crawling():
             data_crawling(foreign_country_url, destination, date ,foreign_country )
             time.sleep(5)
     
-    #국내
+    #국내     
     #for destination in domestic:
     #    domestic_url = f"https://flight.naver.com/flights/domestic/ICN-{destination}-{today}?adult=1&fareType=YC"
     #    data_crawling(domestic_url, destination, today)
@@ -93,12 +93,14 @@ def data_crawling(url, destination, today ,foreign_country):
             
             
         try:
-            #항공사 티켓 리스트 가져오기 -> 인기 항공편이 있으면 section 6, 없으면 section 5 
+            #항공사 티켓 리스트 가져오기 
             try:
+                #인기 항공편이 있으면 section 6
                 section = 6
                 ticket_list =driver.find_element(By.XPATH, f'//*[@id="container"]/div[{section}]/div/div[3]/div')
             
             except:
+                #인기 항공편이 없으면 section 5
                 section = 5
                 ticket_list =driver.find_element(By.XPATH, f'//*[@id="container"]/div[{section}]/div/div[3]/div')
                 
