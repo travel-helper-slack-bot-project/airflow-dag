@@ -86,15 +86,22 @@ def data_crawling(url, destination, today ,foreign_country):
             
         driver.implicitly_wait(25)
         
-        if today.strftime("%Y%m%d") == datetime.now().strftime("%Y%m%d"):
-            section = 5
-        else:
-            section = 6
+        # if today.strftime("%Y%m%d") == datetime.now().strftime("%Y%m%d"):
+        #     section = 5
+        # else:
+        
             
             
         try:
-            #항공사 티켓 리스트 가져오기 
-            ticket_list =driver.find_element(By.XPATH, f'//*[@id="container"]/div[{section}]/div/div[3]/div')
+            #항공사 티켓 리스트 가져오기 -> 인기 항공편이 있으면 section 6, 없으면 section 5 
+            try:
+                section = 6
+                ticket_list =driver.find_element(By.XPATH, f'//*[@id="container"]/div[{section}]/div/div[3]/div')
+            
+            except:
+                section = 5
+                ticket_list =driver.find_element(By.XPATH, f'//*[@id="container"]/div[{section}]/div/div[3]/div')
+                
                 
             #리스트 개수 확인하기 
             #div 태그로 이루어진 항공권 리스트 중에서 항공사 정보를 갖고 있는 큰 div 덩어리만 가지고 올 수 있도록 함 
